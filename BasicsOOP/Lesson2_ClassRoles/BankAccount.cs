@@ -12,7 +12,7 @@ namespace Lesson2_ClassRoles
         
         private double balance;
         private AccountType accountType;
-        private double accountFrame = -1000;
+        public readonly double accountFrame = -1000;  // read only variable
 
         public BankAccount()
         {
@@ -85,6 +85,26 @@ namespace Lesson2_ClassRoles
                 throw new BankActionException("Wrong amount! must me positive");
         }
 
+        private bool WithDrawFromAccount(BankAccount accountFrom, double amount)
+        {
+            if (accountFrom.Balance - amount >= accountFrom.accountFrame)
+            {
+                accountFrom.Balance = accountFrom.Balance - amount;
+                return true;
+            }
+            else
+            {
+                throw new BankActionException("Wrong amount! you exceeding the bank account limit");
+            }
+        }
+
+        public void TransferMoneyFromAnotherAccount(BankAccount accountFrom, double amount)
+        {
+            if (WithDrawFromAccount(accountFrom, amount) == true)
+            {
+                DepositToAccount(amount);
+            }
+        }
 
         public override string ToString()
         {
