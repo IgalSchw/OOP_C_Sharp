@@ -7,8 +7,5 @@ namespace Lesson6.Methodical_Files
     interface IArea
     {
         public double CalculateArea(double Height, double Width);
-
-
-
     }
 }
